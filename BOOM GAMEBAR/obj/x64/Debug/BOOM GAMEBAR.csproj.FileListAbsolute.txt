@@ -6,3 +6,13 @@ D:\AUCA\Diploma\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.csproj.Gene
 D:\AUCA\Diploma\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.exe
 D:\AUCA\Diploma\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.pdb
 D:\AUCA\Diploma\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM_GAMEBAR.Add_client_form.resources
+D:\My files\Dropbox\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.exe
+D:\My files\Dropbox\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.pdb
+D:\My files\Dropbox\BOOM GAMEBAR\BOOM GAMEBAR\bin\x64\Debug\BOOM GAMEBAR.exe
+D:\My files\Dropbox\BOOM GAMEBAR\BOOM GAMEBAR\bin\x64\Debug\BOOM GAMEBAR.pdb
+D:\My files\Dropbox\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM_GAMEBAR.Add_client_form.resources
+D:\My files\Dropbox\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM_GAMEBAR.BOOM.resources
+D:\My files\Dropbox\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM_GAMEBAR.Properties.Resources.resources
+D:\My files\Dropbox\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.csproj.GenerateResource.Cache
+D:\My files\Dropbox\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.csprojResolveAssemblyReference.cache
+D:\AUCA\Diploma\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.csprojResolveAssemblyReference.cache

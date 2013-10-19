@@ -28,17 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.table_num_label = new System.Windows.Forms.Label();
             this.table_num = new System.Windows.Forms.ComboBox();
             this.deposit_payment_groupBox = new System.Windows.Forms.GroupBox();
+            this.paid_price_numeric_up_down = new System.Windows.Forms.NumericUpDown();
             this.client_TIME_out_field = new System.Windows.Forms.DateTimePicker();
             this.client_DATE_out_field = new System.Windows.Forms.DateTimePicker();
-            this.paid_sum_text_box = new System.Windows.Forms.TextBox();
             this.OR_text_label = new System.Windows.Forms.Label();
             this.paid_sum_label = new System.Windows.Forms.Label();
             this.client_time_out_label = new System.Windows.Forms.Label();
             this.add_client_button = new System.Windows.Forms.Button();
+            this.current_time_label = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.deposit_payment_groupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.paid_price_numeric_up_down)).BeginInit();
             this.SuspendLayout();
             // 
             // table_num_label
@@ -52,28 +56,44 @@
             // 
             // table_num
             // 
-            this.table_num.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.table_num.FormattingEnabled = true;
-            this.table_num.Location = new System.Drawing.Point(90, 36);
+            this.table_num.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.table_num.Location = new System.Drawing.Point(74, 36);
             this.table_num.Name = "table_num";
             this.table_num.Size = new System.Drawing.Size(57, 21);
             this.table_num.TabIndex = 1;
+            this.table_num.SelectedIndexChanged += new System.EventHandler(this.table_num_SelectedIndexChanged);
             this.table_num.MouseClick += new System.Windows.Forms.MouseEventHandler(this.table_num_MouseClick);
             // 
             // deposit_payment_groupBox
             // 
+            this.deposit_payment_groupBox.Controls.Add(this.paid_price_numeric_up_down);
             this.deposit_payment_groupBox.Controls.Add(this.client_TIME_out_field);
             this.deposit_payment_groupBox.Controls.Add(this.client_DATE_out_field);
-            this.deposit_payment_groupBox.Controls.Add(this.paid_sum_text_box);
             this.deposit_payment_groupBox.Controls.Add(this.OR_text_label);
             this.deposit_payment_groupBox.Controls.Add(this.paid_sum_label);
             this.deposit_payment_groupBox.Controls.Add(this.client_time_out_label);
             this.deposit_payment_groupBox.Location = new System.Drawing.Point(27, 72);
             this.deposit_payment_groupBox.Name = "deposit_payment_groupBox";
-            this.deposit_payment_groupBox.Size = new System.Drawing.Size(269, 131);
+            this.deposit_payment_groupBox.Size = new System.Drawing.Size(362, 131);
             this.deposit_payment_groupBox.TabIndex = 2;
             this.deposit_payment_groupBox.TabStop = false;
             this.deposit_payment_groupBox.Text = "Deposit payment";
+            // 
+            // paid_price_numeric_up_down
+            // 
+            this.paid_price_numeric_up_down.DecimalPlaces = 2;
+            this.paid_price_numeric_up_down.Location = new System.Drawing.Point(103, 90);
+            this.paid_price_numeric_up_down.Maximum = new decimal(new int[] {
+            30000,
+            0,
+            0,
+            0});
+            this.paid_price_numeric_up_down.Name = "paid_price_numeric_up_down";
+            this.paid_price_numeric_up_down.Size = new System.Drawing.Size(94, 20);
+            this.paid_price_numeric_up_down.TabIndex = 6;
+            this.paid_price_numeric_up_down.ValueChanged += new System.EventHandler(this.paid_price_numeric_up_down_ValueChanged);
+            this.paid_price_numeric_up_down.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.paid_price_numeric_up_down_KeyPress);
+            this.paid_price_numeric_up_down.MouseClick += new System.Windows.Forms.MouseEventHandler(this.paid_price_numeric_up_down_MouseClick);
             // 
             // client_TIME_out_field
             // 
@@ -84,6 +104,8 @@
             this.client_TIME_out_field.ShowUpDown = true;
             this.client_TIME_out_field.Size = new System.Drawing.Size(58, 20);
             this.client_TIME_out_field.TabIndex = 5;
+            this.client_TIME_out_field.ValueChanged += new System.EventHandler(this.client_TIME_out_field_ValueChanged);
+            this.client_TIME_out_field.MouseDown += new System.Windows.Forms.MouseEventHandler(this.client_TIME_out_field_MouseDown);
             // 
             // client_DATE_out_field
             // 
@@ -93,14 +115,7 @@
             this.client_DATE_out_field.Name = "client_DATE_out_field";
             this.client_DATE_out_field.Size = new System.Drawing.Size(86, 20);
             this.client_DATE_out_field.TabIndex = 4;
-            // 
-            // paid_sum_text_box
-            // 
-            this.paid_sum_text_box.Location = new System.Drawing.Point(103, 89);
-            this.paid_sum_text_box.Name = "paid_sum_text_box";
-            this.paid_sum_text_box.Size = new System.Drawing.Size(86, 20);
-            this.paid_sum_text_box.TabIndex = 3;
-            this.paid_sum_text_box.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.paid_sum_text_box_KeyPress);
+            this.client_DATE_out_field.MouseDown += new System.Windows.Forms.MouseEventHandler(this.client_DATE_out_field_MouseDown);
             // 
             // OR_text_label
             // 
@@ -132,13 +147,29 @@
             // add_client_button
             // 
             this.add_client_button.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.add_client_button.Location = new System.Drawing.Point(0, 223);
+            this.add_client_button.Location = new System.Drawing.Point(0, 207);
             this.add_client_button.Name = "add_client_button";
-            this.add_client_button.Size = new System.Drawing.Size(328, 38);
+            this.add_client_button.Size = new System.Drawing.Size(417, 38);
             this.add_client_button.TabIndex = 3;
             this.add_client_button.Text = "Add new client";
             this.add_client_button.UseVisualStyleBackColor = true;
             this.add_client_button.Click += new System.EventHandler(this.add_client_button_Click);
+            // 
+            // current_time_label
+            // 
+            this.current_time_label.AutoSize = true;
+            this.current_time_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.current_time_label.Location = new System.Drawing.Point(127, 9);
+            this.current_time_label.Name = "current_time_label";
+            this.current_time_label.Size = new System.Drawing.Size(90, 16);
+            this.current_time_label.TabIndex = 4;
+            this.current_time_label.Text = "Current time";
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // Add_client_form
             // 
@@ -147,7 +178,8 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(328, 261);
+            this.ClientSize = new System.Drawing.Size(417, 245);
+            this.Controls.Add(this.current_time_label);
             this.Controls.Add(this.add_client_button);
             this.Controls.Add(this.deposit_payment_groupBox);
             this.Controls.Add(this.table_num);
@@ -160,8 +192,10 @@
             this.ShowIcon = false;
             this.Text = "ADD CLIENT";
             this.Load += new System.EventHandler(this.Add_client_form_Load);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Add_client_form_MouseClick);
             this.deposit_payment_groupBox.ResumeLayout(false);
             this.deposit_payment_groupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.paid_price_numeric_up_down)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -174,10 +208,12 @@
         private System.Windows.Forms.GroupBox deposit_payment_groupBox;
         private System.Windows.Forms.DateTimePicker client_TIME_out_field;
         private System.Windows.Forms.DateTimePicker client_DATE_out_field;
-        private System.Windows.Forms.TextBox paid_sum_text_box;
         private System.Windows.Forms.Label OR_text_label;
         private System.Windows.Forms.Label paid_sum_label;
         private System.Windows.Forms.Label client_time_out_label;
         private System.Windows.Forms.Button add_client_button;
+        private System.Windows.Forms.Label current_time_label;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.NumericUpDown paid_price_numeric_up_down;
     }
 }

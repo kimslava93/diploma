@@ -79,7 +79,7 @@ namespace BOOM_GAMEBAR
 
         private void add_client_button_Click(object sender, EventArgs e)
         {
-            Add_client_form open_add_client_form = new Add_client_form();
+            Add_client_form open_add_client_form = new Add_client_form(clients_number);
             open_add_client_form.ShowDialog();
             UpdateData();
         }

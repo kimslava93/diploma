@@ -10,29 +10,58 @@ namespace BOOM_GAMEBAR
     {
         public double getPrice(int table_num)
         {
-            //if (System.DateTime.Parse(System.DateTime.Now.TimeOfDay.ToString("HH:mm")) > System.DateTime.Parse("19:00"))
-            if (table_num > 0 && table_num < 8)
+            double result = 0.0;
+            if (System.DateTime.Parse(System.DateTime.Now.ToString("HH:mm")) < System.DateTime.Parse("19:00"))
             {
-                return (double)80 / (double)60;
+                if (table_num > 0 && table_num < 8)
+                {
+                    result = (double)80 / (double)60;
+                }
+                else if (table_num == 8)
+                {
+                    result = (double)100 / (double)60;
+                }
+                else if (table_num == 9 || table_num == 11)
+                {
+                    result = (double)160 / (double)60;
+                }
+                else if (table_num == 12)
+                {
+                    result = (double)300 / (double)60;
+                }
+                else
+                {
+                    string temp = "Error there is no table #" + table_num.ToString();
+                    MessageBox.Show(temp);
+                    return 0;
+                }
             }
-            else if (table_num == 8)
+            else if (System.DateTime.Parse(System.DateTime.Now.ToString("HH:mm")) > System.DateTime.Parse("19:00"))
             {
-                return (double)100 / (double)60;
+                if (table_num > 0 && table_num < 8)
+                {
+                    result = (double)90 / (double)60;
+                }
+                else if (table_num == 8)
+                {
+                    result = (double)120 / (double)60;
+                }
+                else if (table_num == 9 || table_num == 11)
+                {
+                    result = (double)180 / (double)60;
+                }
+                else if (table_num == 12)
+                {
+                    result = (double)320 / (double)60;
+                }
+                else
+                {
+                    string temp = "Error there is no table #" + table_num.ToString();
+                    MessageBox.Show(temp);
+                    return 0;
+                }
             }
-            else if (table_num == 9 || table_num == 11)
-            {
-                return (double)150 / (double)60;
-            }
-            else if (table_num == 12)
-            {
-                return (double)250 / (double)60;
-            }
-            else
-            {
-                string temp = "Error there is no table #" + table_num.ToString();
-                MessageBox.Show(temp);
-                return 0;
-            }
+            return result;
         }
     }
 }
