@@ -37,14 +37,14 @@ namespace BOOM_GAMEBAR
         }
         private void set_columns_names()
         {
-            clients_table.Columns[0].HeaderText = column_client_num;
-            clients_table.Columns[1].HeaderText = column_table_num;
-            clients_table.Columns[2].HeaderText = column_time_start;
-            clients_table.Columns[3].HeaderText = column_time_out;
-            clients_table.Columns[4].HeaderText = column_discount_id;
-            clients_table.Columns[5].HeaderText = column_discount_sum;
-            clients_table.Columns[6].HeaderText = column_total_sum;
-            clients_table.Columns[7].HeaderText = column_table_state;
+            //clients_table.Columns[0].HeaderText = column_client_num;
+            //clients_table.Columns[1].HeaderText = column_table_num;
+            //clients_table.Columns[2].HeaderText = column_time_start;
+            //clients_table.Columns[3].HeaderText = column_time_out;
+            //clients_table.Columns[4].HeaderText = column_discount_id;
+            //clients_table.Columns[5].HeaderText = column_discount_sum;
+            //clients_table.Columns[6].HeaderText = column_total_sum;
+            //clients_table.Columns[7].HeaderText = column_table_state;
         }
         private void UpdateData()
         {
@@ -65,7 +65,7 @@ namespace BOOM_GAMEBAR
                 {
                     continue;
                 }
-                else if (row.Cells[2].Value.ToString() == row.Cells[3].Value.ToString())
+                else if (row.Cells[7].Value.ToString() == "opened")
                 {
                     row.DefaultCellStyle.BackColor = Color.Yellow;
                 }
@@ -82,6 +82,11 @@ namespace BOOM_GAMEBAR
             Add_client_form open_add_client_form = new Add_client_form(clients_number);
             open_add_client_form.ShowDialog();
             UpdateData();
+        }
+
+        private void close_client_button_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -14,6 +14,7 @@ namespace BOOM_GAMEBAR
         int counter;
         private SqlConnection add_client_to_clients_table_connection;
         private bool op_tables = false;
+        private bool op_clients = false;
         private int clientCounter;
         Options opt = new Options();
         List<string> free_tables;
@@ -35,8 +36,12 @@ namespace BOOM_GAMEBAR
             clients_info = new List<string>();
             free_tables = new List<string>();
             GetDataFromDB();
+            if (free_tables.Count > 0 && free_tables[0] != null)
+            {
+                table_num.SelectedIndex = 0;
+            }
             last_changed_hour = client_TIME_out_field.Value.Hour;
-            increment_value = opt.getPrice(int.Parse(table_num.Text));
+            //increment_value = opt.getPrice(int.Parse(table_num.Text));
             
         }
         private void GetDataFromDB()
@@ -62,20 +67,20 @@ namespace BOOM_GAMEBAR
                         table_num.Items.Add(free_tables[i]);
                     }
                 }
-                if (free_tables.Count > 0 && free_tables[0] != null)
-                {
-                    table_num.SelectedIndex = 0;
-                }
+                //if (free_tables.Count > 0 && free_tables[0] != null)
+                //{
+                //    table_num.SelectedIndex = 0;
+                //}
             //------------------------Getting all free tables-----------------------------
 
 
-                //SqlCommand command2 = new SqlCommand("SELECT customer_id FROM customer", add_client_to_clients_table_connection);
-                //SqlDataReader reader2 = command2.ExecuteReader();
-                //while (reader2.Read())
-                //{
-                //    clients_info.Add(reader2.GetString(0).ToString());
-                //}
-                //reader2.Close();
+                SqlCommand command2 = new SqlCommand("SELECT customer_id FROM customers_with_cards", add_client_to_clients_table_connection);
+                SqlDataReader reader2 = command2.ExecuteReader();
+                while (reader2.Read())
+                {
+                    clients_info.Add(reader2.GetString(0).ToString());
+                }
+                reader2.Close();
             }
         }
         private void table_num_MouseClick(object sender, MouseEventArgs e)
@@ -92,9 +97,9 @@ namespace BOOM_GAMEBAR
 
         private void add_client_button_Click(object sender, EventArgs e)
         {
-            if (table_num.Text == ""|| 
-                    paid_price_numeric_up_down.Value <= 0 ||
-                    client_DATE_out_field.Value.ToString("dd.MMM.yyyy") + " " + client_TIME_out_field.Value.ToString("HH:mm") == System.DateTime.Now.ToString("dd.MMM.yyyy HH:mm"))
+            if (table_num.Text == "" ||
+                paid_price_numeric_up_down.Value <= 0 ||
+                client_DATE_out_field.Value.ToString("dd.MMM.yyyy") + " " + client_TIME_out_field.Value.ToString("HH:mm") == System.DateTime.Now.ToString("dd.MMM.yyyy HH:mm"))
             {
                 MessageBox.Show("ERROR!\nCheck all fields!!!\nPossible troubles:\n -You didn't change date!\n-Paid sum is equal to zero!");
             }
@@ -105,23 +110,76 @@ namespace BOOM_GAMEBAR
                                 " The date you put is is too far from current time!\n" +
                                 " You've entered date: " + client_DATE_out_field.Value.ToString("dd.MMM.yyyy"));
             }
-            else 
+            else
             {
                 SqlCommand insert_deposit_table;
-                insert_deposit_table = new SqlCommand("INSERT INTO new_client(client_num, table_id, time_come, time_out, customer_id, discount, total_cost, client_state)" +
-                                            " VALUES (@client_num, @table_id, @client_time, @client_out, '0', '0', '0', 'opened'); ", add_client_to_clients_table_connection);
+                insert_deposit_table = new SqlCommand("INSERT INTO new_client(client_num, " +
+                                                                             "time_come, " +
+                                                                             "time_out," +
+                                                                             "table_id," +
+                                                                             "customer_id," +
+                                                                             "added_on_cards," +
+                                                                             "already_played_sum," +
+                                                                             "discount," +
+                                                                             "paid_sum," +
+                                                                             "comments, " +
+                                                                             "client_state)" +
+
+                                                     " VALUES (@client_num, " +
+                                                              "@client_come," +
+                                                              "@client_out," +
+                                                              "@table_id," +
+                                                              "@customer_id," +
+                                                              "@added_on_card," +
+                                                              "'0', " +
+                                                              "@discount," +
+                                                              "@paid_sum, " +
+                                                              "@comments, " +
+                                                              "'opened'); ", add_client_to_clients_table_connection);
+
                 insert_deposit_table.Parameters.Add(new SqlParameter("@client_num", SqlDbType.Int));
                 insert_deposit_table.Parameters["@client_num"].Value = clientCounter;
-
-                insert_deposit_table.Parameters.Add(new SqlParameter("@table_id", SqlDbType.Int));
-                insert_deposit_table.Parameters["@table_id"].Value = int.Parse(table_num.Text);
-
-                insert_deposit_table.Parameters.Add(new SqlParameter("@client_time", SqlDbType.DateTime));
-                insert_deposit_table.Parameters["@client_time"].Value = DateTime.Now.ToString("dd.MM.yyyy HH:mm");//client_DATE_out_field.Value.ToString("dd/MMM/yyyy") + " " + client_TIME_out_field.Value.ToString("HH:mm");
+               
+                insert_deposit_table.Parameters.Add(new SqlParameter("@client_come", SqlDbType.DateTime));
+                insert_deposit_table.Parameters["@client_come"].Value = DateTime.Now.ToString("dd.MM.yyyy HH:mm");//client_DATE_out_field.Value.ToString("dd/MMM/yyyy") + " " + client_TIME_out_field.Value.ToString("HH:mm");
 
                 insert_deposit_table.Parameters.Add(new SqlParameter("@client_out", SqlDbType.DateTime));
                 insert_deposit_table.Parameters["@client_out"].Value = client_DATE_out_field.Value.ToString("dd/MMM/yyyy") + " " + client_TIME_out_field.Value.ToString("HH:mm");
 
+                insert_deposit_table.Parameters.Add(new SqlParameter("@table_id", SqlDbType.Int));
+                insert_deposit_table.Parameters["@table_id"].Value = int.Parse(table_num.Text);
+
+                insert_deposit_table.Parameters.Add(new SqlParameter("@customer_id", SqlDbType.VarChar));
+                insert_deposit_table.Parameters["@customer_id"].Value = combo_box_client_discount_card.Text;
+
+                if (combo_box_client_discount_card.Text != "0")
+                {
+                    insert_deposit_table.Parameters.Add(new SqlParameter("@added_on_card", SqlDbType.Float));
+                    insert_deposit_table.Parameters["@added_on_card"].Value = double.Parse(add_money_on_card_numericUpDown.Text);
+
+                    insert_deposit_table.Parameters.Add(new SqlParameter("@discount", SqlDbType.Float));
+                    insert_deposit_table.Parameters["@discount"].Value = 0;
+
+                    insert_deposit_table.Parameters.Add(new SqlParameter("@paid_sum", SqlDbType.Float));
+                    insert_deposit_table.Parameters["@paid_sum"].Value = 0;
+
+                    insert_deposit_table.Parameters.Add(new SqlParameter("@comments", SqlDbType.VarChar));
+                    insert_deposit_table.Parameters["@comments"].Value = "";
+                }
+                else
+                {
+                    insert_deposit_table.Parameters.Add(new SqlParameter("@added_on_card", SqlDbType.Float));
+                    insert_deposit_table.Parameters["@added_on_card"].Value = 0;
+
+                    insert_deposit_table.Parameters.Add(new SqlParameter("@discount", SqlDbType.Float)); // need to be made if there are available any discounts
+                    insert_deposit_table.Parameters["@discount"].Value = 0;
+
+                    insert_deposit_table.Parameters.Add(new SqlParameter("@paid_sum", SqlDbType.Float)); 
+                    insert_deposit_table.Parameters["@paid_sum"].Value = double.Parse(paid_price_numeric_up_down.Value.ToString());
+
+                    insert_deposit_table.Parameters.Add(new SqlParameter("@comments", SqlDbType.VarChar)); // need to be added if necessary 
+                    insert_deposit_table.Parameters["@comments"].Value = "";
+                }
                 insert_deposit_table.ExecuteNonQuery();
 
                 SqlCommand update_table_info;
@@ -346,6 +404,52 @@ namespace BOOM_GAMEBAR
                     MessageBox.Show("Error");
                 }
             }
+        }
+
+        private void combo_box_client_discount_card_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (!op_clients)
+            {
+                op_clients = true;
+                for (int i = 0; i < clients_info.Count; i++)
+                {
+                    combo_box_client_discount_card.Items.Add(clients_info[i]);
+                }
+            }
+        }
+
+        private void combo_box_client_discount_card_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (combo_box_client_discount_card.Text != "0")
+            {
+                deposit_payment_groupBox.Enabled = false;
+                client_info_group_box.Enabled = true;
+
+                SqlCommand get_client_info_command = new SqlCommand("SELECT money_left, customer_name FROM customers_with_cards WHERE customer_id=@customer_id", add_client_to_clients_table_connection);
+                get_client_info_command.Parameters.Add(new SqlParameter("@customer_id", SqlDbType.Int));
+                get_client_info_command.Parameters["@customer_id"].Value = int.Parse(combo_box_client_discount_card.Text);
+                SqlDataReader reader_from_customer_with_cards_table = get_client_info_command.ExecuteReader();
+               
+                while (reader_from_customer_with_cards_table.Read())
+                {
+                    client_name_textBox.Text = reader_from_customer_with_cards_table["customer_name"].ToString();
+                    clients_money_left_textBox.Text = reader_from_customer_with_cards_table["money_left"].ToString();
+                }
+                reader_from_customer_with_cards_table.Close();
+            }
+            else
+            {
+                deposit_payment_groupBox.Enabled = true;
+                client_info_group_box.Enabled = false;
+
+                client_name_textBox.Text = "Usual client";
+                clients_money_left_textBox.Text = "0";
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+          
         }
     }
 }
