@@ -11,22 +11,25 @@ namespace BOOM_GAMEBAR
 {
     public partial class Add_client_form : Form
     {
+
         int counter;
         private SqlConnection add_client_to_clients_table_connection;
         private bool op_tables = false;
         private bool op_clients = false;
         private int clientCounter;
-        Options opt = new Options();
-        List<string> free_tables;
-        List<string> clients_info;
-        Timer current_time = new Timer();
-        double increment_value;
-        int last_changed_hour;
+        private Options opt = new Options();
+        private List<string> free_tables;
+        private List<string> clients_info;
+        private Timer current_time = new Timer();
+        private double increment_value;
+        private int last_changed_hour;
+        //private double was_added_money_on_card_field;
         public Add_client_form(int counter)
         {
             clientCounter = counter;
             InitializeComponent();
         }
+       
         private void Add_client_form_Load(object sender, EventArgs e)
         {
             counter = 0;
@@ -41,7 +44,7 @@ namespace BOOM_GAMEBAR
                 table_num.SelectedIndex = 0;
             }
             last_changed_hour = client_TIME_out_field.Value.Hour;
-            //increment_value = opt.getPrice(int.Parse(table_num.Text));
+            increment_value = opt.getPrice(int.Parse(table_num.Text));
             
         }
         private void GetDataFromDB()
@@ -85,12 +88,15 @@ namespace BOOM_GAMEBAR
         }
         private void table_num_MouseClick(object sender, MouseEventArgs e)
         {
-            if (!op_tables)
+            if (free_tables.Count > 0)
             {
-                op_tables = true;
-                for (int i = 0; i < free_tables.Count; i++)
+                if (!op_tables)
                 {
-                    table_num.Items.Add(free_tables[i]);
+                    op_tables = true;
+                    for (int i = 0; i < free_tables.Count; i++)
+                    {
+                        table_num.Items.Add(free_tables[i]);
+                    }
                 }
             }
         }
@@ -120,6 +126,7 @@ namespace BOOM_GAMEBAR
                                                                              "customer_id," +
                                                                              "added_on_cards," +
                                                                              "already_played_sum," +
+                                                                             "money_left_on_card, " +
                                                                              "discount," +
                                                                              "paid_sum," +
                                                                              "comments, " +
@@ -131,6 +138,7 @@ namespace BOOM_GAMEBAR
                                                               "@table_id," +
                                                               "@customer_id," +
                                                               "@added_on_card," +
+                                                              "'0', " +
                                                               "'0', " +
                                                               "@discount," +
                                                               "@paid_sum, " +
@@ -270,6 +278,7 @@ namespace BOOM_GAMEBAR
         {
             increment_value = opt.getPrice(int.Parse(table_num.Text));
             paid_price_numeric_up_down.Increment = (decimal)increment_value;
+            add_money_on_card_numericUpDown.Increment = (decimal)increment_value;
         }
 
         private void paid_price_numeric_up_down_ValueChanged(object sender, EventArgs e)
@@ -425,17 +434,7 @@ namespace BOOM_GAMEBAR
                 deposit_payment_groupBox.Enabled = false;
                 client_info_group_box.Enabled = true;
 
-                SqlCommand get_client_info_command = new SqlCommand("SELECT money_left, customer_name FROM customers_with_cards WHERE customer_id=@customer_id", add_client_to_clients_table_connection);
-                get_client_info_command.Parameters.Add(new SqlParameter("@customer_id", SqlDbType.Int));
-                get_client_info_command.Parameters["@customer_id"].Value = int.Parse(combo_box_client_discount_card.Text);
-                SqlDataReader reader_from_customer_with_cards_table = get_client_info_command.ExecuteReader();
-               
-                while (reader_from_customer_with_cards_table.Read())
-                {
-                    client_name_textBox.Text = reader_from_customer_with_cards_table["customer_name"].ToString();
-                    clients_money_left_textBox.Text = reader_from_customer_with_cards_table["money_left"].ToString();
-                }
-                reader_from_customer_with_cards_table.Close();
+                get_client_data_add_client_form();
             }
             else
             {
@@ -446,10 +445,27 @@ namespace BOOM_GAMEBAR
                 clients_money_left_textBox.Text = "0";
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void get_client_data_add_client_form()
         {
-          
+              SqlCommand get_client_info_command = new SqlCommand("SELECT money_left, customer_name FROM customers_with_cards WHERE customer_id=@customer_id", add_client_to_clients_table_connection);
+                get_client_info_command.Parameters.Add(new SqlParameter("@customer_id", SqlDbType.VarChar));
+                get_client_info_command.Parameters["@customer_id"].Value = combo_box_client_discount_card.Text;
+                SqlDataReader reader_from_customer_with_cards_table = get_client_info_command.ExecuteReader();
+               
+                while (reader_from_customer_with_cards_table.Read())
+                {
+                    client_name_textBox.Text = reader_from_customer_with_cards_table["customer_name"].ToString();
+                    clients_money_left_textBox.Text = reader_from_customer_with_cards_table["money_left"].ToString();
+                }
+                reader_from_customer_with_cards_table.Close();
         }
+        private void add_payment_button_Click(object sender, EventArgs e)
+        {
+            add_payment_on_card_form apf = new add_payment_on_card_form(combo_box_client_discount_card.Text);
+            apf.ShowDialog();
+            get_client_data_add_client_form();
+        }
+
+        
     }
 }

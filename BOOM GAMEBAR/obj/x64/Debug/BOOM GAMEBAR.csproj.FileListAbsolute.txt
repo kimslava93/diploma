@@ -16,3 +16,15 @@ D:\My files\Dropbox\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM_GAMEBAR.Propert
 D:\My files\Dropbox\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.csproj.GenerateResource.Cache
 D:\My files\Dropbox\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.csprojResolveAssemblyReference.cache
 D:\AUCA\Diploma\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.csprojResolveAssemblyReference.cache
+D:\AUCA\Diploma\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM_GAMEBAR.add_payment_on_card_form.resources
+D:\AUCA\Diploma\TESTS\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.exe
+D:\AUCA\Diploma\TESTS\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.pdb
+D:\AUCA\Diploma\TESTS\BOOM GAMEBAR\BOOM GAMEBAR\bin\x64\Debug\BOOM GAMEBAR.exe
+D:\AUCA\Diploma\TESTS\BOOM GAMEBAR\BOOM GAMEBAR\bin\x64\Debug\BOOM GAMEBAR.pdb
+D:\AUCA\Diploma\TESTS\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.csprojResolveAssemblyReference.cache
+D:\AUCA\Diploma\TESTS\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM_GAMEBAR.Add_client_form.resources
+D:\AUCA\Diploma\TESTS\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM_GAMEBAR.add_payment_on_card_form.resources
+D:\AUCA\Diploma\TESTS\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM_GAMEBAR.BOOM.resources
+D:\AUCA\Diploma\TESTS\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM_GAMEBAR.Properties.Resources.resources
+D:\AUCA\Diploma\TESTS\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM_GAMEBAR.staff_login_form.resources
+D:\AUCA\Diploma\TESTS\BOOM GAMEBAR\BOOM GAMEBAR\obj\x64\Debug\BOOM GAMEBAR.csproj.GenerateResource.Cache

@@ -8,6 +8,16 @@ namespace BOOM_GAMEBAR
 {
     class Options
     {
+        public void switch_on_TV(int table_num)
+        {}
+        public void switch_off_TV(int table_num)
+        {}
+        public bool get_status_of_table(int table_num)
+        {
+            bool result = false;
+            return result;
+        }
+
         public double getPrice(int table_num)
         {
             double result = 0.0;
@@ -63,5 +73,6 @@ namespace BOOM_GAMEBAR
             }
             return result;
         }
+
     }
 }

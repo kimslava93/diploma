@@ -46,13 +46,15 @@
             this.combo_box_client_discount_card = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.client_info_group_box = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.client_name_textBox = new System.Windows.Forms.TextBox();
-            this.clients_money_left_textBox = new System.Windows.Forms.TextBox();
-            this.add_money_on_card_numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.add_payment_button = new System.Windows.Forms.Button();
+            this.add_money_on_card_numericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.clients_money_left_textBox = new System.Windows.Forms.TextBox();
+            this.client_name_textBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.deposit_payment_groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paid_price_numeric_up_down)).BeginInit();
             this.client_info_group_box.SuspendLayout();
@@ -90,7 +92,7 @@
             this.deposit_payment_groupBox.Controls.Add(this.client_time_out_label);
             this.deposit_payment_groupBox.Location = new System.Drawing.Point(12, 72);
             this.deposit_payment_groupBox.Name = "deposit_payment_groupBox";
-            this.deposit_payment_groupBox.Size = new System.Drawing.Size(303, 131);
+            this.deposit_payment_groupBox.Size = new System.Drawing.Size(303, 147);
             this.deposit_payment_groupBox.TabIndex = 2;
             this.deposit_payment_groupBox.TabStop = false;
             this.deposit_payment_groupBox.Text = "Deposit payment";
@@ -187,7 +189,7 @@
             // add_client_button
             // 
             this.add_client_button.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.add_client_button.Location = new System.Drawing.Point(0, 207);
+            this.add_client_button.Location = new System.Drawing.Point(0, 225);
             this.add_client_button.Name = "add_client_button";
             this.add_client_button.Size = new System.Drawing.Size(623, 38);
             this.add_client_button.TabIndex = 5;
@@ -225,7 +227,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(174, 39);
+            this.label1.Location = new System.Drawing.Point(166, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 6;
@@ -233,6 +235,8 @@
             // 
             // client_info_group_box
             // 
+            this.client_info_group_box.Controls.Add(this.label6);
+            this.client_info_group_box.Controls.Add(this.label5);
             this.client_info_group_box.Controls.Add(this.add_payment_button);
             this.client_info_group_box.Controls.Add(this.add_money_on_card_numericUpDown);
             this.client_info_group_box.Controls.Add(this.clients_money_left_textBox);
@@ -243,58 +247,26 @@
             this.client_info_group_box.Enabled = false;
             this.client_info_group_box.Location = new System.Drawing.Point(321, 72);
             this.client_info_group_box.Name = "client_info_group_box";
-            this.client_info_group_box.Size = new System.Drawing.Size(290, 131);
+            this.client_info_group_box.Size = new System.Drawing.Size(290, 147);
             this.client_info_group_box.TabIndex = 7;
             this.client_info_group_box.TabStop = false;
             this.client_info_group_box.Text = "Client info";
             // 
-            // label2
+            // add_payment_button
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 34);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Client name";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 60);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Money left";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 89);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(99, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Add money on card";
-            // 
-            // client_name_textBox
-            // 
-            this.client_name_textBox.Location = new System.Drawing.Point(112, 31);
-            this.client_name_textBox.Name = "client_name_textBox";
-            this.client_name_textBox.ReadOnly = true;
-            this.client_name_textBox.Size = new System.Drawing.Size(172, 20);
-            this.client_name_textBox.TabIndex = 3;
-            // 
-            // clients_money_left_textBox
-            // 
-            this.clients_money_left_textBox.Location = new System.Drawing.Point(112, 57);
-            this.clients_money_left_textBox.Name = "clients_money_left_textBox";
-            this.clients_money_left_textBox.ReadOnly = true;
-            this.clients_money_left_textBox.Size = new System.Drawing.Size(172, 20);
-            this.clients_money_left_textBox.TabIndex = 4;
+            this.add_payment_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.add_payment_button.Location = new System.Drawing.Point(212, 120);
+            this.add_payment_button.Name = "add_payment_button";
+            this.add_payment_button.Size = new System.Drawing.Size(27, 23);
+            this.add_payment_button.TabIndex = 7;
+            this.add_payment_button.Text = ">";
+            this.add_payment_button.UseVisualStyleBackColor = true;
+            this.add_payment_button.Click += new System.EventHandler(this.add_payment_button_Click);
             // 
             // add_money_on_card_numericUpDown
             // 
             this.add_money_on_card_numericUpDown.DecimalPlaces = 2;
-            this.add_money_on_card_numericUpDown.Location = new System.Drawing.Point(112, 87);
+            this.add_money_on_card_numericUpDown.Location = new System.Drawing.Point(112, 123);
             this.add_money_on_card_numericUpDown.Maximum = new decimal(new int[] {
             30000,
             0,
@@ -304,16 +276,66 @@
             this.add_money_on_card_numericUpDown.Size = new System.Drawing.Size(70, 20);
             this.add_money_on_card_numericUpDown.TabIndex = 6;
             // 
-            // add_payment_button
+            // clients_money_left_textBox
             // 
-            this.add_payment_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.add_payment_button.Location = new System.Drawing.Point(212, 84);
-            this.add_payment_button.Name = "add_payment_button";
-            this.add_payment_button.Size = new System.Drawing.Size(27, 23);
-            this.add_payment_button.TabIndex = 7;
-            this.add_payment_button.Text = ">";
-            this.add_payment_button.UseVisualStyleBackColor = true;
-            this.add_payment_button.Click += new System.EventHandler(this.button1_Click);
+            this.clients_money_left_textBox.Location = new System.Drawing.Point(112, 50);
+            this.clients_money_left_textBox.Name = "clients_money_left_textBox";
+            this.clients_money_left_textBox.ReadOnly = true;
+            this.clients_money_left_textBox.Size = new System.Drawing.Size(172, 20);
+            this.clients_money_left_textBox.TabIndex = 4;
+            // 
+            // client_name_textBox
+            // 
+            this.client_name_textBox.Location = new System.Drawing.Point(112, 24);
+            this.client_name_textBox.Name = "client_name_textBox";
+            this.client_name_textBox.ReadOnly = true;
+            this.client_name_textBox.Size = new System.Drawing.Size(172, 20);
+            this.client_name_textBox.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 125);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(99, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Add money on card";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Money left";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(62, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Client name";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 77);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Added money";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 102);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(92, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Total sum on card";
             // 
             // Add_client_form
             // 
@@ -322,7 +344,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(623, 245);
+            this.ClientSize = new System.Drawing.Size(623, 263);
             this.Controls.Add(this.client_info_group_box);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.combo_box_client_discount_card);
@@ -378,5 +400,7 @@
         private System.Windows.Forms.TextBox clients_money_left_textBox;
         private System.Windows.Forms.TextBox client_name_textBox;
         private System.Windows.Forms.Button add_payment_button;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }
